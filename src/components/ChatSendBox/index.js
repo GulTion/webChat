@@ -24,20 +24,9 @@ const ChatSendBox = (props)=>{
       setMessage("");
   }
 
-const setTyping = (condition) =>{
-  const {allusers, user} = store.getState();
-      const you = allusers.find(u=>u.name===user.name);
-      db.collection("allusers").doc(you.id).update({...you, isTyping:condition})
-}
+
   return <div className="ChatSendBox">
     <input
-    onFocus={e=>{
-      setTyping(true)
-    }}
-
-    onBlur={e=>{
-      setTyping(false)
-    }}
     
      onKeyDown={e=>{
       if(e.key=='Enter'){

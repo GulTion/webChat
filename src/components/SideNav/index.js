@@ -13,24 +13,91 @@ class SideNav extends React.Component{
   }
 
 
-  componentWillMount(){
-
+  componentDidMount(){
+    const {allusers} = store.getState();
     db.collection('allusers')
     .get()
     .then(e=>{
-      this.setState({
-        allusers:e.docs.map(k=>k.data())
-      });
+      store.dispatch({type:"ADD_ALL_USERS",data:e.docs.map(k=>{return {...k.data(),id:k.id}})});
+
+    const users = store.getState().user;
+
+    const you = store.getState().allusers.find(k=>k.name==users.name);
+     db.collection('allusers').doc(you.id).update({...you, isOnline:true});
+      store.dispatch({type:"ADD_ID_OF_USER",data:{...you, isOnline:true}});
+
+//     function handleVisibilityChange() {
+//   if(document.hidden) {
+      
+//   } else {
+
+//   }
+// }
+
+// document.addEventListener("visibilitychange", handleVisibilityChange, false);
+    
+
+     var browserPrefixes = ['moz', 'ms', 'o', 'webkit'];
+
+// get the correct attribute name
+function getHiddenPropertyName(prefix) {
+  return (prefix ? prefix + 'Hidden' : 'hidden');
+}
+
+// get the correct event name
+function getVisibilityEvent(prefix) {
+  return (prefix ? prefix : '') + 'visibilitychange';
+}
+
+// get current browser vendor prefix
+function getBrowserPrefix() {
+  for (var i = 0; i < browserPrefixes.length; i++) {
+    if(getHiddenPropertyName(browserPrefixes[i]) in document) {
+      // return vendor prefix
+      return browserPrefixes[i];
+    }
+  }
+
+  // no vendor prefix needed
+  return null;
+}
+
+// bind and handle events
+var browserPrefix = getBrowserPrefix();
+
+function handleVisibilityChange() {
+  if(document[getHiddenPropertyName(browserPrefix )]) {
+    // the page is hidden
+    db.collection('allusers').doc(you.id).update({...you, isOnline:false});
+      store.dispatch({type:"ADD_ID_OF_USER",data:{...you, isOnline:false}});
+  } else {
+    // the page is visible
+          db.collection('allusers').doc(you.id).update({...you, isOnline:true}).then(e=>{
+            console.log(you.id);
+          });
+      store.dispatch({type:"ADD_ID_OF_USER",data:{...you, isOnline:true}});
+  }
+}
+
+document.addEventListener(getVisibilityEvent(browserPrefix), handleVisibilityChange, false);
+
     });
+    
+   
+    
 
     db.collection('allusers')
     .onSnapshot(e=>{
-      this.setState({
-        allusers:e.docs.map(k=>{return {...k.data(),id:k.id}})
-      });
-      store.dispatch({type:"ADD_ALL_USERS",data:e.docs.map(k=>{return {...k.data(),id:k.id}})});
 
-    })
+      store.dispatch({type:"ADD_ALL_USERS",data:e.docs.map(k=>
+      {
+        return {...k.data(),id:k.id}
+      
+      })
+        });
+
+      //Now Add server userID for ONLINE purpose or custom   
+    });
 
 
 
@@ -69,24 +136,30 @@ class SideNav extends React.Component{
 
 
 
+
   }
   render(){
     
-    const {allusers} = this.state;
-    const {user} = store.getState();
+ 
+    const {user, allusers} = store.getState();
   return (
     <>
     <div className="SideNav">{allusers.map((e,i)=>{
       if(user.name==e.name)
         return;
-      return <div onClick={e=>{
-        this.readyForChat(
-          {
+      return <div 
+              onClick={e=>{
+        this.readyForChat({
             from:store.getState().user.name, 
-            to:store.getState().allusers[i].name})
-            }} className="user" key={i}>
+            to:store.getState().allusers[i].name
+          })
+            }} 
+            
+              className="user" key={i}>
+
             <div className="Name">{e.name}</div>
-            <div className="isTyping">{e.isTyping?"Typing ...":""}</div>
+            <div className={e.isOnline?"isOnline":"isOffline"}></div>
+            
             </div>
     })}
     </div></>

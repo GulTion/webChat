@@ -19,7 +19,7 @@ export default function reducer(state=initState, action){
 
 
   else if(type==_.ADD_ALL_USERS){
-    return {...state, allusers:data};
+    return {...state, allusers:data.sort((a,b)=>b.isOnline)};
   }
 
   else if(type=="ADD_CURRENT_COLLECTION"){
@@ -28,6 +28,10 @@ export default function reducer(state=initState, action){
 
   else if(type=="ADD_CHAT_LIST"){
     return {...state, chatList:data}
+  }
+
+  else if(type=="ADD_ID_OF_USER"){
+    return {...state, user:data}
   }
 
 

@@ -13,13 +13,6 @@ class TopNav extends React.Component{
     
     
   }
-  isUserTyping=(user)=>{
-    try{
-     return store.getState().allusers.find(e=>e.name==user).isTyping
-    }catch(e){
-      
-    }
-  }
 
   render(){
   const {user} = store.getState().currentCollection;
@@ -35,7 +28,7 @@ class TopNav extends React.Component{
     }} style={{cursor:"pointer"}} className="navBtn" src={Icons.navBtn} alt={"NavBtn"}/>
     <div className={"ActiveUser"}>
     {user}
-    <div className="isTyping">{this.isUserTyping(user)?"typing ...":""}</div>
+    <div className="isTyping"></div>
     </div>
    
     </div>

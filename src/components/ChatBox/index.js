@@ -14,7 +14,7 @@ class ChatBox extends React.Component{
   render(){
     const {chatList} = store.getState();
   return (<div className="ChatBox">
-      {chatList.map((chat, index)=>{
+      {chatList.sort((a,b)=>b.isOnline).map((chat, index)=>{
         if(chat!=undefined)
         return <Chat chat={chat}/>
       })}

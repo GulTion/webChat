@@ -15,11 +15,13 @@ const ChatSendBox = (props)=>{
       return;
       console.log(chat);
       db.collection(store.getState().currentCollection.collection)
-      .add(chat);
+      .add(chat).then(e=>{
+        const _t = document.querySelector(".ChatBox")
+        _t.scrollTo(0, _t.scrollHeight)
+      });
       
-    
 
-      
+    
       setMessage("");
   }
   return <div className="ChatSendBox">

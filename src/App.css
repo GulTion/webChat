@@ -1,0 +1,53 @@
+.App-wrapper{
+  display: flex;
+  justify-content: center;
+}
+.App{
+  font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif;
+  margin: 0;
+  display: flex;
+  height:calc(100% - 1em);
+  position: fixed;
+  justify-content: space-between;
+  width:calc(100% - 1em);
+  padding: 0 !important;
+  min-width:calc(360 - 1em);
+  max-width: 1000px;
+}
+.App .Right-wrapper{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+}
+.App .Left-wrapper{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 300px;
+  width: 50%;
+  position: relative;
+}
+
+@media(max-width: 660px){
+  .App{
+    display: block;
+
+  }
+  .App .Right-wrapper{
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .App .Left-wrapper{
+  
+    background: white;
+    box-shadow:10px 0px 10px rgba(0, 0, 0, 0.3) ;
+    z-index: 3;
+    display: none;
+    height: calc(100% - 0.5em);
+  }
+ 
+}
+

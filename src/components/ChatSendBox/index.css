@@ -1,0 +1,37 @@
+.ChatSendBox{
+  
+  width:calc(100% - 2em);
+  display: flex;
+  height: 36px;
+  padding: 0.5em;
+  margin: 0.5em;
+  background: linear-gradient(45deg, #ddd 0%, #ddd 50%, #ccc 50%, #ddd 100%);
+  border-radius:10px;
+  box-shadow:0 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.ChatSendBox .ChatInput{
+  width: 100%;
+  padding-left:0.5em;
+
+  font-weight: 400;
+  border: none;
+  border-bottom: 1px dashed grey;
+  margin-top:0;
+  margin-right:10px;
+  margin-bottom:2px;
+  margin-left: 10px; 
+  font-size: 1.1em;
+  background: none;
+  color:#444;
+  word-wrap: break-word;
+}
+.ChatSendBox .ChatInput:focus{
+  border-bottom: 1px solid grey;
+  outline: none;
+}
+.ChatSendBox .SendBtn{
+  cursor: pointer;
+
+
+}

@@ -1,0 +1,32 @@
+.Chat-wrapper{
+  display: flex;
+  margin:0.5em 0; 
+
+}
+.Chat{
+  display: flex;
+  box-sizing: content-box;
+  background: white;
+  flex-flow: column nowrap;
+  padding: 0.5em;
+  padding-bottom:1.25em; 
+  padding-top: 0.25em;
+  border-radius:10px;
+  position: relative;
+  background: linear-gradient(45deg, #eee 0%, #eee 50%, #ddd 50%, #eee 100%);
+  box-shadow:0 5px 5px rgba(0, 0, 0, 0.3);
+  color: #444;
+  min-width: 30px;
+  max-width: 75%;
+  word-wrap: break-word;
+}
+.Chat .details .time{
+  font-size: 12px;
+  font-weight: 600;
+  position: absolute;
+  bottom: 0.25em;
+  right: 0.5em;
+
+
+
+}

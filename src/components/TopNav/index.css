@@ -1,0 +1,19 @@
+.TopNav{
+  width: calc(100% - 2em);
+  margin: 0.5em;
+  padding: 0.5em;
+
+  box-shadow:0 5px 5px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(45deg, #ddd 0%, #ddd 50%, #ccc 50%, #ddd 100%);
+  border-radius: 10px;
+  position: sticky;
+  top: 0.5em;
+  height: 48px !important;
+  display: flex;
+  align-items: center;
+}
+.ActiveUser{
+  
+  margin-left:1em;
+  font-size: 1.2em;
+}

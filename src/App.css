@@ -36,6 +36,8 @@
 @media(max-width: 660px){
   .App{
     display: block;
+    position: fixed;
+    left: 0;
 
   }
   .App .Right-wrapper{

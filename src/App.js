@@ -6,6 +6,7 @@ import ChatSendBox from "./components/ChatSendBox/"
 import ChatBox from "./components/ChatBox/"
 import TopNav from "./components/TopNav"
 import SideNav from "./components/SideNav/"
+import Icons from "./components/Icons/"
 
 import {db} from "./service"
 import store from "./store.js"
@@ -59,7 +60,10 @@ class App extends React.Component{
     </div>
     <div className="Right-wrapper">
     <TopNav />
-   { !store.getState().currentCollection.user==""?<ChatBox chatList={chatList}/>:<div className="ChatBox">wrong</div>}
+   { !store.getState().currentCollection.user==""?<ChatBox chatList={chatList}/>:<div className="ChatBox"><div className="Unknown">
+    <img src={Icons.logo} alt={"logo"} />
+    <h2>Welcome to WebChat</h2>
+   </div></div>}
     <ChatSendBox onSend={(chat)=>{
       this.setState({chatList:[...chatList, chat]});
       const chatbox = document.querySelector(".ChatBox");

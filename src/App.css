@@ -8,7 +8,7 @@
   display: flex;
   height:calc(100% - 1em);
   position: fixed;
-  justify-content: space-between;
+  justify-content: center;
   width:calc(100% - 1em);
   padding: 0 !important;
   min-width:calc(360 - 1em);
@@ -19,7 +19,8 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-
+  max-width: 670px;
+  min-width: 320px;
 }
 .App .Left-wrapper{
   display: flex;

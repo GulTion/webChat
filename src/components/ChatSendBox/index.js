@@ -17,24 +17,7 @@ const ChatSendBox = (props)=>{
       db.collection(store.getState().currentCollection.collection)
       .add(chat);
       
-      db.collection(store.getState().currentCollection.collection).orderBy("time",'asc')
-      .onSnapshot(e=>{
-        const arr=e.docs.map(k=>{
-        if(k.data().message!=""){
-            const t =  k.data()
-            if(t.from==store.getState().user.name){
-            t["you"] = true;
-          }else{
-            t["you"] = false;
-          }
-
-      return t;
-        }
-          
-        }
-        );
-         store.dispatch({type:"ADD_CHAT_LIST",data:arr});
-        })
+    
 
       
       setMessage("");

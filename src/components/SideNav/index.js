@@ -21,7 +21,6 @@ class SideNav extends React.Component{
       this.setState({
         allusers:e.docs.map(k=>k.data())
       });
-      console.log(store.getState())
     });
 
     db.collection('allusers')
@@ -30,8 +29,9 @@ class SideNav extends React.Component{
         allusers:e.docs.map(k=>k.data())
       });
       store.dispatch({type:"ADD_ALL_USERS",data:e.docs.map(k=>k.data())})
-      console.log(store.getState())
     })
+
+
 
   }
 
@@ -43,6 +43,25 @@ class SideNav extends React.Component{
       console.log(store.getState());
       store.dispatch({type:"ADD_CURRENT_COLLECTION", data:{collection:collection,user:obj.to}})
     });
+
+    db.collection(collection).orderBy("time",'asc')
+      .onSnapshot(e=>{
+        const arr=e.docs.map(k=>{
+        if(k.data().message!=""){
+            const t =  k.data()
+            if(t.from==store.getState().user.name){
+            t["you"] = true;
+          }else{
+            t["you"] = false;
+          }
+
+      return t;
+        }
+      
+        }
+        );
+         store.dispatch({type:"ADD_CHAT_LIST",data:arr});
+        })
 
 
 

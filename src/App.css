@@ -29,6 +29,8 @@
   min-width: 300px;
   width: 50%;
   position: relative;
+
+
 }
 
 @media(max-width: 660px){
@@ -40,6 +42,7 @@
     position: absolute;
     left: 0;
     top: 0;
+    
   }
   .App .Left-wrapper{
   
@@ -47,7 +50,11 @@
     box-shadow:10px 0px 10px rgba(0, 0, 0, 0.3) ;
     z-index: 3;
     display: none;
-    height: calc(100% - 0.5em);
+    height: calc(100% - 0.001em);
+    position: fixed;
+    margin: 0;
+    top: 0;
+    left: 0;
   }
  
 }

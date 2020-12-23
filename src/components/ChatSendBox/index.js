@@ -13,7 +13,6 @@ const ChatSendBox = (props)=>{
   const sendMessage=(chat)=>{
     if(message=="")
       return;
-      console.log(chat);
       db.collection(store.getState().currentCollection.collection)
       .add(chat).then(e=>{
         const _t = document.querySelector(".ChatBox")
@@ -24,8 +23,23 @@ const ChatSendBox = (props)=>{
     
       setMessage("");
   }
+
+const setTyping = (condition) =>{
+  const {allusers, user} = store.getState();
+      const you = allusers.find(u=>u.name===user.name);
+      db.collection("allusers").doc(you.id).update({...you, isTyping:condition})
+}
   return <div className="ChatSendBox">
-    <input onKeyDown={e=>{
+    <input
+    onFocus={e=>{
+      setTyping(true)
+    }}
+
+    onBlur={e=>{
+      setTyping(false)
+    }}
+    
+     onKeyDown={e=>{
       if(e.key=='Enter'){
          sendMessage({
         message,time:new Date().toJSON(),from:store.getState().user.name, 

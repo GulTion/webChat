@@ -8,6 +8,7 @@
   background: linear-gradient(45deg, #ddd 0%, #ddd 50%, #ccc 50%, #ddd 100%);
   border-radius:10px;
   box-shadow:0 5px 5px rgba(0, 0, 0, 0.3);
+  min-width:200px ;
 }
 
 .ChatSendBox .ChatInput{

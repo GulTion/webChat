@@ -26,10 +26,12 @@ class SideNav extends React.Component{
     db.collection('allusers')
     .onSnapshot(e=>{
       this.setState({
-        allusers:e.docs.map(k=>k.data())
+        allusers:e.docs.map(k=>{return {...k.data(),id:k.id}})
       });
-      store.dispatch({type:"ADD_ALL_USERS",data:e.docs.map(k=>k.data())})
+      store.dispatch({type:"ADD_ALL_USERS",data:e.docs.map(k=>{return {...k.data(),id:k.id}})});
+
     })
+
 
 
 
@@ -40,7 +42,7 @@ class SideNav extends React.Component{
     const collection = [obj.from, obj.to].sort().join(":");
     
     db.collection(collection).add({message:"",time:new Date().toJSON()}).then(e=>{
-      console.log(store.getState());
+
       store.dispatch({type:"ADD_CURRENT_COLLECTION", data:{collection:collection,user:obj.to}})
     });
 
@@ -71,16 +73,23 @@ class SideNav extends React.Component{
   render(){
     
     const {allusers} = this.state;
+    const {user} = store.getState();
   return (
+    <>
     <div className="SideNav">{allusers.map((e,i)=>{
+      if(user.name==e.name)
+        return;
       return <div onClick={e=>{
         this.readyForChat(
           {
             from:store.getState().user.name, 
             to:store.getState().allusers[i].name})
-            }} className="user" key={i}>{e.name}</div>
+            }} className="user" key={i}>
+            <div className="Name">{e.name}</div>
+            <div className="isTyping">{e.isTyping?"Typing ...":""}</div>
+            </div>
     })}
-    </div>
+    </div></>
   )
   }
 }

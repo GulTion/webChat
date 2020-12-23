@@ -7,7 +7,7 @@ const Chat = (props)=>{
   
   const _time =  new Date(time)
   const [hours, minute, day] = [_time.getHours(),_time.getMinutes()]
-  return <div style={{justifyContent:you&&"end"}}className="Chat-wrapper"><div className="Chat" style={{background:you&&"white"}}>
+  return <div className={`Chat-wrapper ${you&&"RightChat"}`}><div className="Chat" style={{background:you&&"white"}}>
     <div className="message">{message}</div>
     <div className="details">
       <div className="time">{hours+":"+minute}</div>

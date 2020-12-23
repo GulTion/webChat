@@ -16,3 +16,14 @@
   margin-left:1em;
   font-size: 1.2em;
 }
+.user{
+  display: flex;
+  flex-flow: column nowrap;
+
+
+}
+.isTyping{
+  font-size: 12px;
+  color: rgb(0, 17, 255);
+  font-weight: 600;
+}

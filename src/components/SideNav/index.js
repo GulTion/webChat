@@ -61,7 +61,9 @@ class SideNav extends React.Component{
         }
         );
          store.dispatch({type:"ADD_CHAT_LIST",data:arr});
+         
         })
+
 
 
 

@@ -24,7 +24,10 @@ class App extends React.Component{
   };
   componentDidMount(){
     const {store} = this.props;
-    store.subscribe(()=>this.forceUpdate());
+    store.subscribe(()=>{this.forceUpdate();
+    const _t = document.querySelector(".ChatBox")
+        _t.scrollTo(0, _t.scrollHeight+100);
+    });
      const _key = localStorage.getItem("dont_share_with_anybody");
     if(_key){
       db

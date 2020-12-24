@@ -3,7 +3,7 @@
   height: 100%;
   width: calc(100% -2em);
   background: linear-gradient(45deg, #ddd 0%, #ddd 50%, #ccc 50%, #ddd 100%);
-  margin: 0.5em;
+/* background-image: linear-gradient(to right top, #061d3f, #212558, #432a6d, #6a2a7d, #942185); */
   
   padding: 0.5em;
   border-radius: 10px;

@@ -108,7 +108,12 @@ document.addEventListener(getVisibilityEvent(browserPrefix), handleVisibilityCha
   readyForChat=(obj)=>{
     const collection = [obj.from, obj.to].sort().join(":");
     
-    db.collection(collection).add({message:"",time:new Date().toJSON()}).then(e=>{
+    db.collection(collection).add({
+      time:new Date().toJSON(),
+      type:"readyping",
+      message:"",
+      from:store.getState().user.name
+      }).then(e=>{
 
       store.dispatch({type:"ADD_CURRENT_COLLECTION", data:{collection:collection,user:obj.to}})
     });
@@ -116,7 +121,7 @@ document.addEventListener(getVisibilityEvent(browserPrefix), handleVisibilityCha
     db.collection(collection).orderBy("time",'asc')
       .onSnapshot(e=>{
         const arr=e.docs.map(k=>{
-        if(k.data().message!=""){
+        if(k.data().type="readyping"&&k.data().message!=""){
             const t =  k.data()
             if(t.from==store.getState().user.name){
             t["you"] = true;

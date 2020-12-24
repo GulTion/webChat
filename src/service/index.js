@@ -10,5 +10,11 @@ const firebaseConfig = {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+
+const setTyping = (collection, id, what) =>{
   
-export const db = firebase.firestore();
+}
+
+export default db

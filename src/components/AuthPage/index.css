@@ -67,6 +67,7 @@
 }
 .Page input:focus{
   border-bottom: 1px solid grey;
+  outline: none;
 
 
 } 

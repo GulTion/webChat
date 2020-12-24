@@ -2,7 +2,8 @@
   
   width:calc(100% - 2em);
   display: flex;
-  height: 36px;
+  min-height: 36px;
+  
   padding: 0.5em;
   margin: 0.5em;
   background: linear-gradient(45deg, #ddd 0%, #ddd 50%, #ccc 50%, #ddd 100%);
@@ -15,7 +16,7 @@
 .ChatSendBox .ChatInput{
   width: 100%;
   padding-left:0.5em;
-
+  height: 100%;
   font-weight: 400;
   border: none;
   border-bottom: 1px dashed grey;
@@ -27,6 +28,8 @@
   background: none;
   color:#444;
   word-wrap: break-word;
+  min-width: row;
+  font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif;;
 }
 .ChatSendBox .ChatInput:focus{
   border-bottom: 1px solid grey;

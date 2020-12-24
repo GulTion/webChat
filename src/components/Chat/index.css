@@ -22,6 +22,12 @@
   word-wrap: break-word;
   position: relative;
 }
+.Chat .message{
+  margin:0.25em 0 0em 0;
+
+  font-family: inherit;
+  /* font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif; */
+}
 .Chat .details .time{
   font-size: 12px;
   font-weight: 600;

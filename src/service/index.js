@@ -14,7 +14,7 @@ const db = firebase.firestore();
 
 
 const setTyping = (collection, id, what) =>{
-  
+
 }
 
 export default db

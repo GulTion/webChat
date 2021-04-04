@@ -15,10 +15,14 @@ class SideNav extends React.Component{
 
   componentDidMount(){
     const {allusers} = store.getState();
-    db.collection('allusers')
+    db.collection('users')
     .get()
     .then(e=>{
-      store.dispatch({type:"ADD_ALL_USERS",data:e.docs.map(k=>{return {...k.data(),id:k.id}})});
+      store.dispatch({
+        type:"ADD_ALL_USERS",
+        data:e.docs.map(k=>{
+          return {...k.data(),id:k.id}
+          })});
 
     const users = store.getState().user;
 
@@ -86,9 +90,8 @@ document.addEventListener(getVisibilityEvent(browserPrefix), handleVisibilityCha
    
     
 
-    db.collection('allusers')
+    db.collection('users')
     .onSnapshot(e=>{
-
       store.dispatch({type:"ADD_ALL_USERS",data:e.docs.map(k=>
       {
         return {...k.data(),id:k.id}

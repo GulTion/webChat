@@ -18,14 +18,15 @@ class TopNav extends React.Component{
 
   render(){
   const {currentCollection} = store.getState();
-  db
-  .collection(currentCollection.collection)
-  .where('type','==','typingping')
-  .query('time','asc')
-  .onSnapshot(e=>{
-    const arr = e.docs.map(k=>k.data())
-    console.log(arr);
-  })
+
+  // db
+  // .collection(currentCollection.collection)
+  // .where('type','==','typingping');
+  // .query('time','asc')
+  // .onSnapshot(e=>{
+  //   const arr = e.docs.map(k=>k.data())
+  //   console.log(arr);
+  // })
   
   return (
     <div className="TopNav">

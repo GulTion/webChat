@@ -8,7 +8,8 @@ const initState={
   allusers:[],
   user:{},
   currentCollection:{user:"",collection:"j"},
-  chatList:[]
+  chatList:[],
+  isAuth:false
 }
 export default function reducer(state=initState, action){
   //CHECK_AUTH
@@ -16,7 +17,6 @@ export default function reducer(state=initState, action){
   if(type===_.CHECK_AUTH){
     return {...state, user:data};
   }
-
 
   else if(type==_.ADD_ALL_USERS){
     return {...state, allusers:data.sort((a,b)=>b.isOnline)};
@@ -32,6 +32,9 @@ export default function reducer(state=initState, action){
 
   else if(type=="ADD_ID_OF_USER"){
     return {...state, user:data}
+  }
+  else if(type=="AUTH"){
+    return {...state, isAuth:data}
   }
 
 

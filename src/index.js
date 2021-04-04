@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -11,12 +11,15 @@ import store from './store'
 
 
 const Rout =(props)=>{
-  return (<Router>
-    <Switch>
-      <Route exact path="/" render={()=><App store={store}/>}/>
-      <Route  path="/auth" render={()=><AuthPage store={store}/>}/>
-    </Switch>
-  </Router>)
+  let [isAuth, setAuth] = useState(store.getState().isAuth);
+  store.subscribe(()=>{
+    setAuth(store.getState().isAuth);
+  })
+  return (<>
+      {isAuth?<App store={store}/>:
+     <AuthPage store={store}/>}
+  </>
+  )
 }
 
 

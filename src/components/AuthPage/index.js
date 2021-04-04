@@ -1,94 +1,104 @@
 import React,{useState} from 'react'
 import "./index.css"
-import {db} from "../../service/"
+import {db,firebase} from "../../service/"
+import {signupToUser,isUserExist, signinToUser} from "./controller";
 
+const {log,table}=  console;
 
 const Login=() =>{
   const [alert,setAlert] = useState("");
+  const [isPasswordHidden ,setToHiddenPassword] = useState(true);
 
+  const [data,setData] = useState({email:"",password:""})
 
-  const loginToMe=(cred)=>{
-    if(cred.password==""&&cred.name==""){
-        setAlert("Empty Password and UserName !")
-    }else{  
-      setAlert("")
-    db
-    .collection("users")
-    .where("name","==",cred.name.toLowerCase())
-    .where("password","==",cred.password)
-    .onSnapshot(snap=>{
-        if(snap.docs.length===0){
-          setAlert("Wrong Password or UserName !");
-        }else{
-         
-            
-            localStorage.setItem('dont_share_with_anybody',snap.docs[0].data().key);
-            window.location.pathname = "/";
-        }
-    })}
-  }
+  return <form className="Page"  onSubmit={
+     e=>{
+       e.preventDefault();
+       log(data);
+       signinToUser(data,(cb)=>{
+         if(cb.type=="error"){
+           setAlert(cb.error.message);
+         }
+       });
+     }
+   }>
+    <input onBlur={e=>setData({...data,email:e.target.value})} placeholder="Email" type="email"
+    required={true}
+    />
+    <div className="flex-row">
 
-  const [data,setData] = useState({name:"",password:""})
-  return <div className="Page">
-    <input onBlur={e=>setData({...data,name:e.target.value})} placeholder="User Name" type="text"/>
-    <input onBlur={e=>setData({...data,password:e.target.value})} placeholder="Password" type="password"/>
+    <input 
+    onBlur={e=>{setData({...data,password:e.target.value})}}  placeholder="Password" 
+    required={true}
+    
+    type={isPasswordHidden?"password":"text"}/>
+
+    <div className="passwordShower" onClick={()=>setToHiddenPassword(!isPasswordHidden)}>{!isPasswordHidden?"hide":"show"}</div>
+    </div>
+    
     <Alert alert={alert}/>
-    <input onClick={()=>{loginToMe(data)}} value="LOGIN" type="button"/>
-  </div>
+    <input type="submit" value="LOGIN"/>
+  </form>
 }
 
 const Signup =() =>{
-  const [data,setData] = useState({name:"",password:""})
+  const [data,setData] = useState({name:"",password:"",email:""})
   const [alert,setAlert] = useState("");
   const [isTaken, setTaken] = useState(true);
-  const checkUser = (name)=>{
-    
-          db
-          .collection('users')
-          .where('name','==',name)
-          .onSnapshot(snap=>{
-            if(snap.docs.length==0){
-              setTaken(false);
-              setAlert("");
-            }else{
-              setAlert("Username is already taken !");
-            }
-          })
-  }
-
-  const signupToMe =(cred)=>{
-
-      const _key = btoa(JSON.stringify({...cred,key:new Date().getTime().toString(36)}));
-      cred["key"] = _key;
-      cred["name"] = cred.name.toLowerCase();
-        if(cred.password==""&&cred.name==""&&cred.email==""&&!isTaken){
-            setAlert("Empty Password , UserName & Email !");
-        }else{  
-              db
-              .collection('users')
-              .add(cred)
-              .then(e=>{
-                localStorage.setItem('dont_share_with_anybody',cred.key);
-                window.location.pathname = "/";
-                
-                db.collection('allusers').add({name:cred.name,isOnline:false, isTyping:false,}).then(e=>{
-
-                })
-              })
-        }
-  }
+  const [isPasswordHidden ,setToHiddenPassword] = useState(true);
 
 
 
-   return <div className="Page">
+   return <form className="Page" onSubmit={
+     e=>{
+       e.preventDefault();
+       signupToUser(data,(dataFromCreatedUser)=>{
+          log({dataFromCreatedUser});
+
+          if(dataFromCreatedUser.type==="error"){
+            setAlert(dataFromCreatedUser.err.message);
+          }
+          if(dataFromCreatedUser.type==="ok"){
+             localStorage.setItem("dont_share_with_anybody",dataFromCreatedUser.user.user.refreshToken)
+             setAlert("")
+          }
+       });
+     }
+   }>
+
     <input 
-    onBlur={e=>{setData({...data,name:e.target.value});checkUser(e.target.value.toLowerCase())}}  placeholder="User Name" type="text"/>
+    onBlur={async e=>{
+      setData({...data,name:e.target.value});
+       isUserExist(e.target.value.toLowerCase(),doc=>{
+         log(doc)
+         setAlert(!doc?"":`User is Already Exist !`)
+       })
+      }}
+    required={true}
+    placeholder="User Name" 
+    type="text"
+    min={5}
+
+    />
+    <div className="flex-row">
+
     <input 
-    onBlur={e=>{setData({...data,password:e.target.value});}}  placeholder="Password" type="password"/>
-    <input onBlur={e=>setData({...data,email:e.target.value})}  placeholder="Email" type="email" />
+    onBlur={e=>{setData({...data,password:e.target.value});}}  placeholder="Password" 
+    required={true}
+    min={8}
+    type={isPasswordHidden?"password":"text"}/>
+
+    <div className="passwordShower" onClick={()=>setToHiddenPassword(!isPasswordHidden)}>{!isPasswordHidden?"hide":"show"}</div>
+    </div>
+
+    <input 
+    onBlur={e=>setData({...data,email:e.target.value})}  placeholder="Email" 
+    type="email" 
+    required={true}
+    />
     <Alert alert={alert}/>
-    <input onClick={()=>{signupToMe(data)}} value="SIGNUP" type="button"/>
-  </div>
+    <input value="SIGNUP" type="submit" />
+  </form>
 }
 
 const Alert = (props)=>{

@@ -71,7 +71,7 @@
 
 
 } 
-.Page input[type="button"]{
+.Page input[type="button"],.Page input[type="submit"]{
      box-shadow:0 5px 5px rgba(0, 0, 0, 0.3) ;
       padding: 0.5em;
       border: none;
@@ -82,15 +82,36 @@
       font-size: 1.5em;
       color:#444;
 }
-.Page input[type="button"]:focus{
+.Page input[type="button"]:focus,.Page input[type="submit"]:focus{
   background: linear-gradient(45deg, #ddd 0%, #ddd 50%, #ccc 50%, #ddd 100%);
 
   
 }
 .Alert{
-  height: 20px;
+  
   width: 100%;
   text-align: center;
   color: red;
   font-weight: 600;
 }
+
+.flex-row{
+  display: flex;
+  flex-flow: row no-wrap;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-row input{
+  width: 100%;
+}
+.passwordShower{
+  text-transform: uppercase;
+  background: white;
+  box-shadow:0 5px 5px rgba(0, 0, 0, 0.3) ;
+  padding: 0.25em 0.5em;
+  border-radius: 100px;
+  font-weight: 600;
+  cursor: pointer;
+  
+  }

@@ -54,7 +54,7 @@ const ChatSendBox = (props)=>{
   
 
   return <div className="ChatSendBox">
-    <textarea
+    <input
     onFocus={e=>{
       var searchTimeout;
       e.target.onkeypress=function(){
@@ -75,7 +75,7 @@ const ChatSendBox = (props)=>{
     }} 
     
     value={message} 
-    onChange={(e)=>setMessage(e.target.value)} className="ChatInput"></textarea>
+    onChange={(e)=>setMessage(e.target.value)} className="ChatInput" />
     <img onClick={()=>{
       sendMessage({
         message,time:new Date().toJSON(),

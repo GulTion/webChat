@@ -35,32 +35,11 @@ class App extends React.Component{
         _t.scrollTo(0, _t.scrollHeight+100);
     });
 
-    // Private key of User store in localStorage and Reason for auth
-    const _key = localStorage.getItem("dont_share_with_anybody");
-
-    // if Key is not Present then Move user to login page
-    if(_key){
-      //key is Found the Send key to db and check is this is present is not present then send the user to the login page
-      db
-        .collection('users')
-        .where("key","==",_key)
-        .onSnapshot(snap=>{
-         if(snap.docs.length==0){
-           window.location.pathname = "/auth";
-           
-         }else{
-
-            store.dispatch({type:_.CHECK_AUTH,data:snap.docs[0].data()});
-         }
-        });
-        
-    }else{
-      window.location.pathname = "/auth";
-    };
+  
     
   }
 
-  render(){  
+  render(){ 
     const {chatList} = this.state
     return (
     <div className="App-wrapper">

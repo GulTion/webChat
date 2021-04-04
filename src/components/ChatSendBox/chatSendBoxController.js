@@ -26,4 +26,26 @@ const sendMessage = ({message},action)=>{
     }
 }
 
+const detectionForTyping = ()=>{
+    var typingTimer;                //timer identifier
+var doneTypingInterval = 5000;  //time in ms, 5 second for example
+var $input = document.getElementById('#myInput');
+
+//on keyup, start the countdown
+$input.on('keyup', function () {
+  clearTimeout(typingTimer);
+  typingTimer = setTimeout(doneTyping, doneTypingInterval);
+});
+
+//on keydown, clear the countdown 
+$input.on('keydown', function () {
+  clearTimeout(typingTimer);
+});
+
+//user is "finished typing," do something
+function doneTyping () {
+  
+}
+}
+
 export {sendMessage}

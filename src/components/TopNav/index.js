@@ -34,12 +34,16 @@ class TopNav extends React.Component{
       if(window.innerWidth<660){
       const _t = document.querySelector("#left-wrapper");
       
-      _t.style.display = (_t.style.display=="none"||_t.style.display=="")?"flex":"none"
+      _t.style.display = (_t.style.display=="none"||_t.style.display=="")?"flex":"none";
+      }else{
+        const _t = document.querySelector("#left-wrapper");
+      
+      _t.style.display = (_t.style.display=="none"||_t.style.display=="")?"flex":"none";
       }
     }} style={{cursor:"pointer"}} className="navBtn" src={Icons.navBtn} alt={"NavBtn"}/>
     <div className={"ActiveUser"}>
     {chatWith}
-    <div className="isTyping"></div>
+    <div className="isTyping">isTyping..</div>
     </div>
    
     </div>

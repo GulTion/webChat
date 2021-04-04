@@ -6,10 +6,10 @@ import {db} from "../service/"
 
 const initState={
   allusers:[],
-  user:{name:"user1", mail:"user1@gmail.com"},
+  user:{name:"gultion", mail:"gkv8192@gmail.com"},
   currentCollection:{user:"",collection:"j"},
   chatList:[],
-  isAuth:false
+  isAuth:true
 }
 export default function reducer(state=initState, action){
   //CHECK_AUTH

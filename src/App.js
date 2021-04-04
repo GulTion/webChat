@@ -45,6 +45,7 @@ class App extends React.Component{
     <div className="App-wrapper">
       <div className="App">
         <div id={"left-wrapper"} className="Left-wrapper">
+        <TopNav />
           <SideNav store={this.props.store}/>
         </div>
 

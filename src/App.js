@@ -10,7 +10,7 @@ import Icons from "./components/Icons/"
 
 import {db} from "./service"
 import store from "./store.js"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends React.Component{
   constructor(){
@@ -45,17 +45,15 @@ class App extends React.Component{
     <div className="App-wrapper">
       <div className="App">
         <div id={"left-wrapper"} className="Left-wrapper">
-        
-          <TopNav />
           <SideNav store={this.props.store}/>
-
         </div>
 
         <div className="Right-wrapper">
 
         <TopNav />
+
         {
-          !store.getState().currentCollection.user==""?
+          !store.getState().user.chatWith==""?
             <ChatBox chatList={chatList}/>:
             <div className="ChatBox">
               <div className="Unknown">
@@ -66,7 +64,7 @@ class App extends React.Component{
           }
 
         {
-          !store.getState().currentCollection.user==""?
+          !store.getState().user.chatWith==""?
           <ChatSendBox 
               onSend={(chat)=>
                 {

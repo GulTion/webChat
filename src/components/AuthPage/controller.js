@@ -9,9 +9,9 @@ const signupToUser = ({name,email, password}, callback)=>{
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(user=>{
-          db.collection("users").doc(email).set({name,uid:user.user.uid,id:email}).then(
+          db.collection("users").doc(email).set({name,uid:user.user.uid,email:email}).then(
             k=>{
-              store.dispatch({type:"AUTH", data:true});
+              store.dispatch({type:"AUTH", data:{isAuth:true,user:{name,uid:user.user.uid,email:email}}});
               callback({type:"ok",user, userDB:k})
             }
           )
@@ -51,9 +51,10 @@ const signinToUser = ({email, password},cb)=>{
     // Signed in
     var user = userCredential.user;
     console.log({signinToUser:userCredential});
-    store.dispatch({type:"AUTH", data:true});
+    
     db.collection("users").doc(email).get().then(e=>{
-      store.dispatch({type:"ADD_ID_OF_USER", data:e.data()});
+      // store.dispatch({type:"ADD_ID_OF_USER", data:e.data()});
+      store.dispatch({type:"AUTH", data:{user:e.data(), isAuth:true}});
     })
     cb({type:"ok",userCredential})
     // ...

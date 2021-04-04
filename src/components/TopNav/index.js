@@ -17,7 +17,7 @@ class TopNav extends React.Component{
   }
 
   render(){
-  const {currentCollection} = store.getState();
+  const {chatWith} = store.getState().user;
 
   // db
   // .collection(currentCollection.collection)
@@ -38,7 +38,7 @@ class TopNav extends React.Component{
       }
     }} style={{cursor:"pointer"}} className="navBtn" src={Icons.navBtn} alt={"NavBtn"}/>
     <div className={"ActiveUser"}>
-    {currentCollection.user}
+    {chatWith}
     <div className="isTyping"></div>
     </div>
    

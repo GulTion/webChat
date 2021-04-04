@@ -6,7 +6,7 @@ import {db} from "../service/"
 
 const initState={
   allusers:[],
-  user:{},
+  user:{name:"user1", mail:"user1@gmail.com"},
   currentCollection:{user:"",collection:"j"},
   chatList:[],
   isAuth:false
@@ -30,12 +30,18 @@ export default function reducer(state=initState, action){
     return {...state, chatList:data}
   }
 
-  else if(type=="ADD_ID_OF_USER"){
+
+  else if(type=="AUTH"){
+    return {...state, isAuth:data.isAuth, user:data.user}
+  }
+
+  else if(type===_.GET_LIST_OF_ALL_USERS){
+    return {...state, allusers:data};
+  }
+  else if(type==="SET_USER"){
     return {...state, user:data}
   }
-  else if(type=="AUTH"){
-    return {...state, isAuth:data}
-  }
+
 
 
 

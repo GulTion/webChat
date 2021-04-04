@@ -12,21 +12,21 @@ class TopNav extends React.Component{
   }
   }
   componentWillMount(){
-    
+    const {user} = store.getState();
+    db
+    .collection(user.chatDB||"abc")
+    .doc(user.chatWith+"_isTyping")
+    .onSnapshot(sho=>{
+      console.log(sho)
+      // this.setState({isTyping:sho.data().isTyping})
+    })
     
   }
 
   render(){
-  const {chatWith} = store.getState().user;
+  const {user} = store.getState();
 
-  // db
-  // .collection(currentCollection.collection)
-  // .where('type','==','typingping');
-  // .query('time','asc')
-  // .onSnapshot(e=>{
-  //   const arr = e.docs.map(k=>k.data())
-  //   console.log(arr);
-  // })
+
   
   return (
     <div className="TopNav">
@@ -42,8 +42,8 @@ class TopNav extends React.Component{
       }
     }} style={{cursor:"pointer"}} className="navBtn" src={Icons.navBtn} alt={"NavBtn"}/>
     <div className={"ActiveUser"}>
-    {chatWith}
-    <div className="isTyping">isTyping..</div>
+    {user.chatWith}
+    <div className="isTyping">{!this.state.isTyping?"":"isTyping.."}</div>
     </div>
    
     </div>

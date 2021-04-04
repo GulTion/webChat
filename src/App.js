@@ -64,8 +64,8 @@ class App extends React.Component{
             </div>
           }
 
-        {
-          !store.getState().user.chatWith==""?
+        
+   
           <ChatSendBox 
               onSend={(chat)=>
                 {
@@ -74,9 +74,7 @@ class App extends React.Component{
                   chatbox.scrollTo(0, chatbox.scrollHeight);
                   }
                 }
-            />:
-          null
-          }
+            />
 
     </div>
     </div>

@@ -26,26 +26,39 @@ const sendMessage = ({message},action)=>{
     }
 }
 
+
+const setTyping = (isTyping) =>{
+    const {user} = store.getState();
+    db.collection(user.chatDB).doc(user.name+"_isTyping").set({
+        isTyping
+    })
+}
+
+
+
 const detectionForTyping = ()=>{
     var typingTimer;                //timer identifier
-var doneTypingInterval = 5000;  //time in ms, 5 second for example
-var $input = document.getElementById('#myInput');
+var doneTypingInterval = 2000;  //time in ms, 5 second for example
+var $input = document.getElementById('ChatInput');
 
 //on keyup, start the countdown
-$input.on('keyup', function () {
+
+$input.addEventListener('keyup', function () {
   clearTimeout(typingTimer);
   typingTimer = setTimeout(doneTyping, doneTypingInterval);
 });
 
 //on keydown, clear the countdown 
-$input.on('keydown', function () {
+$input.addEventListener('keydown', function () {
   clearTimeout(typingTimer);
 });
 
 //user is "finished typing," do something
 function doneTyping () {
-  
-}
+    setTyping(false);
 }
 
-export {sendMessage}
+
+}
+
+export {sendMessage,setTyping,detectionForTyping}

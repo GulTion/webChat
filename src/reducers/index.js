@@ -9,7 +9,7 @@ const initState={
   user:{name:"gultion", mail:"gkv8192@gmail.com"},
   currentCollection:{user:"",collection:"j"},
   chatList:[],
-  isAuth:true
+  isAuth:false
 }
 export default function reducer(state=initState, action){
   //CHECK_AUTH
